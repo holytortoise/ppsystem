@@ -18,7 +18,7 @@ class Schüler(models.Model):
     klassenstufe = models.IntegerField()
     klassengruppe = models.CharField(max_length=1)
     rfid = models.ForeignKey(Rfid)
-    anwesend = models.BooleanField()
+    anwesend = models.BooleanField(default=False)
 
     def __str__(self):
         return "{} {} {} {}".format(self.nachname,self.vorname,self.klassenstufe,self.klassengruppe)
