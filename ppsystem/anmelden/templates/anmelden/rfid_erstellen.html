@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% load staticfiles %}
+{% block titel %}Reservierungsformular{% endblock titel %}
+{% block head %}{% endblock head %}
+{% block content %}
+
+  <h1>Rfid erstellen</h1>
+  <form method="post">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <input type="submit" class="btn btn-primary" name="submit">
+  </form>
+
+{% endblock content %}

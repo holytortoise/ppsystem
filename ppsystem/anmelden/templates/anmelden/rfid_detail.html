@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% block titel %}Rfid Details{% endblock titel %}
+{% block content %}
+
+  <h2>Rfid ID: {{rfid_karte.id}}</h2>
+  {% if schüler is None %}
+      <h2>Kein Schüler zugeordnet</h2>
+  {% else %}
+  {% for schüler_a in schüler  %}
+
+      <h2>Nachname: {{schüler_a.nachname}}</h2>
+      <h2>Vorname: {{schüler_a.vorname}}</h2>
+      <h2>Klassenstufe: {{schüler_a.klassenstufe}}</h2>
+      <h2>Klassengruppe: {{schüler_a.klassengruppe}}</h2>
+      {% endfor %}
+  {% endif %}
+  <h2><a href="{% url 'anmelden:rfid_update' pk=rfid_karte.id %}">Bearbeiten</h2>
+  <h2><a href="{% url 'anmelden:rfid_delete' pk=rfid_karte.id %}">Löschen</h2>
+
+
+{% endblock content %}

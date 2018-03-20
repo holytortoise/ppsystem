@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% load staticfiles %}
+{% block titel %}Rfid Liste{% endblock titel %}
+{% block head %}{% endblock head %}
+{% block content %}
+
+<ul>
+  {% for rfid in rfids %}
+    {% if forloop.first %}
+      <table class="table table-hover">
+        <thead>
+          <th>ID</th>
+          <th>UID</th>
+          <th>Detail</th>
+          <th>Bearbeiten</th>
+          <th>Löschen</th>
+        </thead>
+        <tbody>
+  {% endif %}
+  <tr>
+    <td>{{ rfid.id }}</td>
+    <td>{{ rfid.rfid_nr }}</td>
+    <td><a href="{% url 'anmelden:rfid_detail' pk=rfid.id %}">Details</td>
+    <td><a href="{% url 'anmelden:rfid_update' pk=rfid.id %}">Bearbeiten</td>
+    <td><a href="{% url 'anmelden:rfid_delete' pk=rfid.id %}">Löschen</td>
+  </tr>
+  {% if forloop.last %}
+  </tbody>
+</table>
+  {% endif %}
+  {% endfor %}
+
+
+
+
+{% endblock content %}

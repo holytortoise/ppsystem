@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block titel %}{{user.username}}{% endblock titel %}
+{% block content %}
+
+<h1>{{user.first_name}} {{user.last_name}}</h1>
+
+<h3 id='password_change'><a href="{% url 'account:password-change' %}">Passwort ändern</a></h3>
+
+
+{% endblock content %}

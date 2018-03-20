@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% load staticfiles %}
+{% block titel %}Reservierungsformular{% endblock titel %}
+{% block head %}{% endblock head %}
+{% block content %}
+
+  <h1>Schüler wirklich löschen?</h1>
+  <form method="post">
+    {% csrf_token %}
+    <p>Wollen sie {{object}} wirklich löschen?</p>
+    <input type="submit" class="btn btn-danger" name="Löschen" value="Confirm">
+  </form>
+
+{% endblock content %}

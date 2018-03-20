@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% load staticfiles %}
+{% block titel %}Schüler Liste{% endblock titel %}
+{% block head %}{% endblock head %}
+{% block content %}
+
+<ul>
+  {% for schüler in schülers %}
+    {% if forloop.first %}
+      <table class="table table-hover">
+        <thead>
+          <th>Nachname</th>
+          <th>Vorname</th>
+          <th>Klassenstufe</th>
+          <th>Klassengruppe</th>
+          <th>Anwesenheit</th>
+          <th>Zeit</th>
+          <th>Rfid</th>
+          <th>Bearbeiten</th>
+        </thead>
+        <tbody>
+  {% endif %}
+  <tr>
+    <td>{{ schüler.nachname }}</td>
+    <td>{{ schüler.vorname }}</td>
+    <td>{{ schüler.klassenstufe }}</td>
+    <td>{{ schüler.klassengruppe }}</td>
+    <td>{% if schüler.anwesend %} <span class="glyphicon glyphicon-ok"></span>
+       {% else %} <span class="glyphicon glyphicon-remove"></span> {% endif %}</td>
+    <td>Zeit</td>
+    <td>{{schüler.rfid}}</td>
+    <td><a href="{% url 'anmelden:schüler_detail' pk=schüler.id %}">Bearbeiten</td>
+  </tr>
+  {% if forloop.last %}
+  </tbody>
+</table>
+  {% endif %}
+  {% endfor %}
+
+
+
+
+{% endblock content %}

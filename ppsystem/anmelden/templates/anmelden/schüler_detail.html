@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% block titel %}Schüler Detail{% endblock titel %}
+{% block content %}
+
+  <h2>Nachname: {{schüler.nachname}}</h2>
+  <h3>Vorname: {{schüler.vorname}}</h3>
+  <h3>Klassenstufe: {{ schüler.klassenstufe }}</h3>
+  <h3>Klassengruppe: {{schüler.klassengruppe}}</h3>
+  <h3>Rfid Karten-ID: {{ schüler.rfid.id}} </h3>
+
+  <a href="{% url 'anmelden:schüler_update' pk=schüler.id %}">
+    <span  class="btn btn-warning">Bearbeiten</span>
+  <a href="{% url 'anmelden:schüler_delete' pk=schüler.id %}">
+    <span class="btn btn-danger">Löschen</span>
+
+
+{% endblock content %}
