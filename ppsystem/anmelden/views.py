@@ -40,7 +40,7 @@ class SchülerUpdate(LoginRequiredMixin,UpdateView):
     login_url = 'account:login'
     redirect_field_name = 'redirect_to'
     model = models.Schüler
-    fields = ['vorname','nachname','klassenstufe','klassengruppe','rfid']
+    fields = ['vorname','nachname','klassenstufe','klassengruppe','rfid','anwesend',]
     success_url = '/'
 
 
@@ -107,6 +107,8 @@ def anmelden(request):
         zeit.datum = timezone.localdate()
         zeit.zeit = timezone.localtime()
         zeit.save()
+        schüler.anwesend = True
+        schüler.save()
         name ="{} {}".format(schüler.vorname, schüler.nachname)
         return HttpResponse(name)
     else:
