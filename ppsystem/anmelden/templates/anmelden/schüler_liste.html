@@ -34,6 +34,9 @@
     <td><a href="{% url 'anmelden:schüler_detail' pk=schüler.id %}">Bearbeiten</td>
   </tr>
   {% if forloop.last %}
+  <a class="btn btn-warning" href="{% url 'anmelden:stufe_erhöhen' %}">Klassenstufe erhöhen</a>
+  <a class="btn btn-danger" href="{% url 'anmelden:stufe_verringern' %}">Klassenstufe verringern</a>
+
   </tbody>
 </table>
   {% endif %}

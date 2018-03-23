@@ -5,4 +5,22 @@
 {% block head %}{% endblock head %}
 {% block content %}
 <h1>Startseite</h1>
+<h2>Schüler Suche</h2>
+<form method="post">
+  {% csrf_token %}
+  {% bootstrap_form form %}
+  <input type="submit" name="suchen" value="Suchen">
+</form>
+{% if suche is True %}
+    {% for schüler in schülers  %}
+        <br>
+        <h2>Suche hat ergeben:</h2>
+        <h3>{{schüler.vorname}} {{schüler.nachname}}</h3>
+        <h3>{{schüler.klassenstufe}} {{schüler.klassengruppe}}</h3>
+        <a href="{% url 'anmelden:schüler_update' pk=schüler.id %}">Bearbeiten</a>
+        <br>
+        <hr>
+    {% endfor %}
+
+{% endif %}
 {% endblock content %}

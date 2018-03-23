@@ -21,4 +21,6 @@ urlpatterns = [
      views.RfidDelete.as_view(), name='rfid_delete'),
     url(r'^rfid_detail/(?P<pk>[0-9]+)/$', views.rfid_detail, name='rfid_detail'),
     url(r'^anmelden/$', views.anmelden, name="anmelden"),
+    url(r'^stufe_erhähen', views.stufe_erhöhen, name="stufe_erhöhen"),
+    url(r'^stufe_verringern', views.stufe_verringern, name="stufe_verringern"),
 ]

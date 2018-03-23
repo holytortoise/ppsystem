@@ -5,12 +5,44 @@ from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
 from . import models
+from . import forms
 # Create your views here.
+@login_required(login_url='account:login')
 def index(request):
-    return render(request, 'index.html')
+    suche = False
+    if request.method == 'POST':
+        form = forms.SuchForm(data=request.POST)
+        if form.is_valid():
+            suche = True
+            schülers = models.Schüler.objects.filter(vorname=form.cleaned_data.get("vorname"),nachname=form.cleaned_data.get("nachname"))
+            if schülers.exists():
+                form = forms.SuchForm()
+                context_dict = {'schülers':schülers,'suche':suche,'form':form}
+                return render(request, 'index.html', context_dict)
+            else:
+                schülers = None
+                context_dict = {'schülers':schülers,'suche':suche,'form':form}
+                return render(request, 'index.html', context_dict)
+    else:
+        form = forms.SuchForm()
+    return render(request, 'index.html', {'form':form,'suche':suche})
+
+def stufe_erhöhen(request):
+    schülers = models.Schüler.objects.all()
+    for schüler in schülers:
+        schüler.klassenstufe = schüler.klassenstufe + 1
+        schüler.save()
+    return HttpResponseRedirect(reverse('anmelden:schüler_list'))
+
+def stufe_verringern(request):
+    schülers = models.Schüler.objects.all()
+    for schüler in schülers:
+        schüler.klassenstufe = schüler.klassenstufe - 1
+        schüler.save()
+    return HttpResponseRedirect(reverse('anmelden:schüler_list'))
 
 class SchülerList(LoginRequiredMixin,ListView):
     login_url = 'account:login'
