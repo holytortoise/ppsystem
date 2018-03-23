@@ -28,3 +28,6 @@ class Zeit(models.Model):
     schüler = models.ForeignKey(Schüler)
     zeit = models.TimeField()
     datum = models.DateField()
+
+    def __str__(self):
+        return "{} {} {}".format(self.schüler, self.datum, self.zeit)
