@@ -23,4 +23,5 @@ urlpatterns = [
     url(r'^anmelden/$', views.anmelden, name="anmelden"),
     url(r'^stufe_erhähen', views.stufe_erhöhen, name="stufe_erhöhen"),
     url(r'^stufe_verringern', views.stufe_verringern, name="stufe_verringern"),
+    url(r'^klassen_löschen', views.klasse_löschen, name="klasse_löschen"),
 ]

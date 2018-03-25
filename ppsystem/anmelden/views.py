@@ -29,7 +29,7 @@ def index(request):
     else:
         form = forms.SuchForm()
     return render(request, 'index.html', {'form':form,'suche':suche})
-
+@login_required(login_url='account:login')
 def stufe_erhöhen(request):
     schülers = models.Schüler.objects.all()
     for schüler in schülers:
@@ -37,6 +37,15 @@ def stufe_erhöhen(request):
         schüler.save()
     return HttpResponseRedirect(reverse('anmelden:schüler_list'))
 
+@login_required(login_url='account:login')
+def klasse_löschen(request):
+    schülers = models.Schüler.objects.all()
+    for schüler in schülers:
+        if schüler.klassenstufe == 5:
+            schüler.delete()
+    return HttpResponseRedirect(reverse('anmelden:schüler_list'))
+
+@login_required(login_url='account:login')
 def stufe_verringern(request):
     schülers = models.Schüler.objects.all()
     for schüler in schülers:
