@@ -133,7 +133,7 @@ def anmelden(request):
         rfid = models.Rfid.objects.filter(rfid_nr=UID)
         schüler = models.Schüler.objects.get(rfid = rfid[0])
         if models.Zeit.objects.filter(schüler=schüler, datum=timezone.localdate()):
-            return HttpResponse('{} {} bereits angemeldet'.format(schüler.vorname,schüler.nachname))
+            return HttpResponse('Du hast dich bereits angemeldet')
         zeit = models.Zeit()
         zeit.schüler = schüler
         zeit.datum = timezone.localdate()
